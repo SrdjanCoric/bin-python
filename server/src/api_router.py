@@ -14,13 +14,17 @@ def generate_bin_url():
 def get_all_bins():
     bins = database.get_all_bins()
     return jsonify(bins)
-   
+
 @api.post("/bins")
 def create_new_bin():
     data = request.get_json()
     requested_url = data.get('url')
+    print("requested_url", requested_url)
+    print("data", data)
     if (is_valid_url(requested_url)):
+        print("here")
         new_bin = database.create_bin(requested_url)
+        print("new_bin", new_bin)
         return jsonify(new_bin)
     elif (is_existing_url(requested_url)):
         return jsonify('That URL is already in use.'), 400
@@ -34,12 +38,12 @@ def get_bin_requests(bin_url):
         return jsonify(requests)
     else:
         return jsonify("Invalid URL. Bin not found."), 400
-    
+
 @api.delete("/bins/<string:bin_url>")
 def delete_bin(bin_url):
     if (is_existing_url(bin_url)):
         result = database.delete_bin(bin_url)
-        return {}    
+        return {}
     else:
         return jsonify("Invalid URL. Bin not found."), 400
 
