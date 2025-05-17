@@ -2,23 +2,24 @@ from flask import jsonify
 from pymongo import MongoClient
 import psycopg2
 from bson.objectid import ObjectId
+from src.services.psql_service import PsqlServices
 
 class DatabaseService:
     def __init__(self):
-        self.mongo_client = MongoClient('mongodb://localhost:27017/') 
+        self.mongo_client = MongoClient('mongodb://localhost:27017/')
         self.mongo_db = self.mongo_client['RequestBin']
-        self.connection = psycopg2.connect(dbname='request_bin')
+        self.connection = PsqlServices.get_connection()
 
     def get_paths(self):
         query = """
         SELECT path FROM bins;
         """
-    
+
         with self.connection:
             with self.connection.cursor() as cursor:
                 cursor.execute(query)
                 result = cursor.fetchall()
-    
+
         return result
 
     def get_all_bins(self):
@@ -101,7 +102,7 @@ class DatabaseService:
 
 
         return mongo_db_object_id.inserted_id
-      
+
     def delete_bin_requests(self, bin_url):
         query = f"""
         DELETE FROM requests
