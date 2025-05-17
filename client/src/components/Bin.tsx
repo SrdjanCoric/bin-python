@@ -8,7 +8,7 @@ import Request from "./Request";
 import clipboardIcon from "../assets/clipboard.svg";
 import checkboxIcon from "../assets/checkbox.svg";
 
-const baseUrl = "http://3.84.206.208:5003";
+const baseUrl = "http://3.84.206.208/";
 
 const Bin = ({ binList, setBinList }) => {
   const [requests, setRequests] = useState([]);
