@@ -18,15 +18,30 @@ const getAllRequests = async (bin_url) => {
 };
 
 const createBin = async (newBin) => {
-  const response = await fetch(`${baseUrl}/bins`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ url: newBin }),
-  });
+  try {
+    const response = await fetch(`${baseUrl}/bins`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: newBin }),
+    });
 
-  return response.json();
+    // Add debugging to see what's being returned
+    const text = await response.text();
+    console.log("Raw response:", text);
+
+    try {
+      // Try to parse it as JSON
+      return JSON.parse(text);
+    } catch (e) {
+      // If it's not JSON, just return the text
+      return text;
+    }
+  } catch (error) {
+    console.error("Error in createBin:", error);
+    throw error;
+  }
 };
 
 const deleteAllRequests = async (bin_url) => {
