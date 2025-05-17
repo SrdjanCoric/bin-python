@@ -67,7 +67,7 @@ const NewBinForm = ({ onFormSubmission, newUrl, setNewUrl }) => {
       <form id="new_bin_form" action={onFormSubmission}>
         <h1>New Basket</h1>
         <p>Click the button below to create a new basket!</p>
-        <label htmlFor="new_url">http://3.84.206.208/</label>
+        <label htmlFor="new_url">http://localhost</label>
         <input
           id="new_url"
           name="new_url"
