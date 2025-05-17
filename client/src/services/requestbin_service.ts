@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:5003/api';
+const baseUrl = "http://3.84.206.208:5003/api";
 
 const generateBin = async () => {
   const response = await fetch(`${baseUrl}/bins/generate`);
@@ -18,20 +18,20 @@ const getAllRequests = async (bin_url) => {
 };
 
 const createBin = async (newBin) => {
-  const response = await fetch(`${baseUrl}/bins`, { 
-    method: 'POST',
+  const response = await fetch(`${baseUrl}/bins`, {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
-    body: JSON.stringify({ url: newBin })
+    body: JSON.stringify({ url: newBin }),
   });
-  
+
   return response.json();
 };
 
 const deleteAllRequests = async (bin_url) => {
   const response = await fetch(`${baseUrl}/bins/${bin_url}/requests/all`, {
-    method: 'DELETE',
+    method: "DELETE",
   });
 
   return response;
@@ -39,7 +39,7 @@ const deleteAllRequests = async (bin_url) => {
 
 const deleteBin = async (bin_url) => {
   const response = await fetch(`${baseUrl}/bins/${bin_url}`, {
-    method: 'DELETE',
+    method: "DELETE",
   });
 
   return response;
@@ -51,5 +51,5 @@ export default {
   getAllRequests,
   createBin,
   deleteAllRequests,
-  deleteBin
+  deleteBin,
 };
