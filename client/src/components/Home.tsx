@@ -14,6 +14,7 @@ const Home = ({ binList, setBinList }) => {
   const handleFormSubmission = async (formData) => {
     try {
       const newUrl = formData.get("new_url");
+      console.log("newUrl", newUrl);
       const newBin = await service.createBin(newUrl);
       const updatedList = binList.slice();
 

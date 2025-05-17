@@ -19,6 +19,7 @@ const getAllRequests = async (bin_url) => {
 
 const createBin = async (newBin) => {
   try {
+    console.log("newBin", newBin);
     const response = await fetch(`${baseUrl}/bins`, {
       method: "POST",
       headers: {
